@@ -38,7 +38,16 @@ public:
 			}
 		}
 	}
-
+	
+	void res_graph(std::ostream & ostream, std::vector<unsigned> res)
+	{
+		for (unsigned i : res)
+		{
+			ostream << i << ' ';
+		}
+		
+	}
+	
 private:
 	void help(unsigned index, std::vector<unsigned> * used, std::vector<unsigned> * res)
 	{
