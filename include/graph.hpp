@@ -4,6 +4,9 @@
 #include<string>
 #include<stdexcept>
 
+
+//using namespace std;
+
 class graph_t
 {
 private: 
@@ -47,14 +50,14 @@ public:
 	void read(std::istringstream& stream);
 
 private:
-	void help(unsigned index, std::vector<unsigned> * used, std::vector<unsigned> * res)
+	void help(unsigned index, std::vector<unsigned> & used, std::vector<unsigned> & res)
 	{
-		(*used)[index] = true;
-		(*res).push_back(index + 1);
+		used[index] = true;
+		res.push_back(index + 1);
 		for (unsigned j = 0; j < V; j++) {
 			if (pole[index][j])
 			{
-				if (!(*used)[j])
+				if (!(used)[j])
 				{
 					help(j, used, res);
 				}
@@ -72,7 +75,7 @@ public:
 		for (unsigned i = 0; i < V; i++) {
 			used.push_back(false);
 		}
-		help(index, &used, &res);
+		help(index, used, res);
 		return res;
 	}
 };
@@ -84,12 +87,14 @@ void graph_t::read(std::istringstream& stream)
 		for (std::size_t j = 0; j < V; j++)
 		{
 			unsigned a;
-			stream >> a;
-			if (a==1 || a==0)
+			if (stream >> a)
 			{
-				pole[i][j] = a;
+				if (a == 1 || a == 0)
+				{
+					pole[i][j] = a;
+				}
+				else throw std::invalid_argument("Error input");
 			}
-			else throw std::invalid_argument("Error input");
 		}
 		if (pole[i][i] != 0) 
 		{
