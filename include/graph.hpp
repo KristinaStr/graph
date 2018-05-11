@@ -4,9 +4,6 @@
 #include<string>
 #include<stdexcept>
 
-
-//using namespace std;
-
 class graph_t
 {
 private: 
@@ -93,12 +90,12 @@ void graph_t::read(std::istringstream& stream)
 				{
 					pole[i][j] = a;
 				}
-				else throw std::invalid_argument("Error input");
+				else throw std::invalid_argument("The entered element is not equal to zero or one");
 			}
 		}
 		if (pole[i][i] != 0) 
 		{
-			throw std::invalid_argument("Error input");
+			throw std::invalid_argument("Diagonal element is nonzero");
 		}
 	}
 }
