@@ -82,4 +82,9 @@ public:
 		help(index, &used, &res);
 		return res;
 	}
+	
+	unsigned size_V() 
+	{
+		return V;
+	}
 };
