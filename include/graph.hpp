@@ -2,6 +2,10 @@
 #include <sstream>
 #include <vector>
 #include<string>
+#include<stdexcept>
+
+
+//using namespace std;
 
 class graph_t
 {
@@ -18,12 +22,16 @@ public:
 			pole[i] = new bool [V];
 		}
 	}
-	
+
 	graph_t()
 	{
 		V = 0;
 		pole = nullptr;
 	}
+
+	graph_t & operator=(graph_t const &) = delete;
+
+	graph_t(graph_t const &) = delete;
 
 	~graph_t() 
 	{
@@ -34,26 +42,13 @@ public:
 		delete[] pole;
 	}
 
-	void read(std::istringstream& stream) 
+	unsigned size_V() 
 	{
-		for (std::size_t i = 0; i < V; i++) 
-		{
-			for(std::size_t j = 0; j < V; j++)
-			{
-				stream >> pole[i][j];
-			}
-		}
+		return V;
 	}
-	
-	void res_graph(std::ostream & ostream, std::vector<unsigned> res)
-	{
-		for (unsigned i : res)
-		{
-			ostream << i << ' ';
-		}
-		
-	}
-	
+
+	void read(std::istringstream& stream);
+
 private:
 	void help(unsigned index, std::vector<unsigned> * used, std::vector<unsigned> * res)
 	{
@@ -71,9 +66,10 @@ private:
 	}
 
 public:
+	void res_graph(std::ostream & ostream, std::vector<unsigned> res);
+
 	std::vector<unsigned> dfs(unsigned index) 
 	{
-		
 		std::vector<unsigned> used, res;
 		used.reserve(V);
 		for (unsigned i = 0; i < V; i++) {
@@ -82,9 +78,34 @@ public:
 		help(index, &used, &res);
 		return res;
 	}
-	
-	unsigned size_V() 
-	{
-		return V;
-	}
 };
+
+void graph_t::read(std::istringstream& stream)
+{
+	for (std::size_t i = 0; i < V; i++)
+	{
+		for (std::size_t j = 0; j < V; j++)
+		{
+			unsigned a;
+			stream >> a;
+			if (a==1 || a==0)
+			{
+				pole[i][j] = a;
+			}
+			else throw std::invalid_argument("Error input");
+		}
+		if (pole[i][i] != 0) 
+		{
+			throw std::invalid_argument("Error input");
+		}
+	}
+}
+
+void graph_t::res_graph(std::ostream & ostream, std::vector<unsigned> res)
+{
+	for (unsigned i : res)
+	{
+		ostream << i << ' ';
+	}
+
+}
