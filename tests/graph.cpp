@@ -6,7 +6,7 @@
 TEST_CASE ("Create")
 {
   graph_t graph;
-  REQUIRE( graph_2.size_V() == 0 );
+  REQUIRE( graph.size_V() == 0 );
 }
 
 TEST_CASE ("Test my graph")
