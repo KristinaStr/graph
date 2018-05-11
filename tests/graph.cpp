@@ -3,6 +3,12 @@
 
 #include "graph.hpp"
 
+TEST_CASE ("Create")
+{
+  graph_t graph;
+  REQUIRE( graph_2.size_V() == 0 );
+}
+
 TEST_CASE ("Test my graph")
 {
   graph_t graph(4);
@@ -19,7 +25,7 @@ TEST_CASE ("Test my graph")
 	std::ostringstream output;
 	graph.res_graph(output, result);
   
-  std::string res_out = "2 1 3 4 ";
+  std::string res_out = "0";
   REQUIRE( res_out == output.str() );
 }
 
