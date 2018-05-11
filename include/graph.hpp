@@ -18,6 +18,12 @@ public:
 			pole[i] = new bool [V];
 		}
 	}
+	
+	graph_t()
+	{
+		V = 0;
+		pole = nullptr;
+	}
 
 	~graph_t() 
 	{
